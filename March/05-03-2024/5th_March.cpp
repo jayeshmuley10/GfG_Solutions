@@ -1,0 +1,32 @@
+class Solution{
+    public:
+    int maxIndexDiff(int a[], int n) 
+    { 
+        if (n==1)
+            return 0;
+        int ans=-1;
+        int lmin[n];
+        int rmax[n];
+        lmin[0]=a[0];
+        for (int i=1;i<n;i++)
+        {
+            lmin[i]=min(lmin[i-1], a[i]);
+        }
+        rmax[n-1]=a[n-1];
+        for (int j=n-2;j>=0;j--)
+        {
+            rmax[j]=max(rmax[j+1], a[j]);
+        }
+        int i=0, j=0;
+        while (i<n && j<n)
+        {
+            if (lmin[i]<=rmax[j])
+            {
+                ans=max(ans, j-i);
+                j++;
+            }
+            else i++;
+        }
+        return ans;
+    }
+};
